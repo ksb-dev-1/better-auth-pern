@@ -142,11 +142,16 @@ export const auth = betterAuth({
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
       // redirectURI: `${process.env.BACKEND_URL}/api/auth/callback/github`,
-      disableStateCheck: true,
     },
   },
   trustedOrigins: [process.env.FRONTEND_URL!, process.env.BACKEND_URL!],
   baseURL: process.env.BETTER_AUTH_URL,
+  account: {
+    // This tells Better Auth to skip the cookie check entirely for OAuth state.
+    // This is the strongest way to bypass the 'state_mismatch' on Render subdomains.
+    skipStateCookieCheck: true,
+    storeStateStrategy: "database", // Optional: Stores state in DB instead of cookie
+  },
   advanced: {
     useSecureCookies: true,
     defaultCookieAttributes: {
