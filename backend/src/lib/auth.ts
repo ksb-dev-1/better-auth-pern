@@ -141,6 +141,7 @@ export const auth = betterAuth({
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+      disableStateCheck: true, // Add this temporarily
     },
   },
   trustedOrigins: [process.env.FRONTEND_URL!],
