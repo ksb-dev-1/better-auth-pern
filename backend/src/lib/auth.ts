@@ -78,11 +78,11 @@ import { sendEmailVerify } from "../emails/_lib/send-verification-email.js";
 
 export const ALLOWED_ORIGINS = [process.env.FRONTEND_URL!];
 
-const backendUrl = process.env.BACKEND_URL || process.env.BETTER_AUTH_URL;
+// const backendUrl = process.env.BACKEND_URL || process.env.BETTER_AUTH_URL;
 
-if (!backendUrl) {
-  throw new Error("BACKEND_URL or BETTER_AUTH_URL env var is not set!");
-}
+// if (!backendUrl) {
+//   throw new Error("BACKEND_URL or BETTER_AUTH_URL env var is not set!");
+// }
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
