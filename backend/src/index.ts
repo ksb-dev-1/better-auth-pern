@@ -43,7 +43,7 @@ import "./env.js";
 import { auth } from "./lib/auth.js";
 
 const app = express();
-const PORT = process.env.PORT ?? 3000;
+app.set("trust proxy", 1);
 
 // CORS configuration - CRITICAL for OAuth
 app.use(
@@ -55,11 +55,11 @@ app.use(
   }),
 );
 
-// Parse JSON bodies
-app.use(express.json());
-
 // Auth handler - MUST be before other routes
 app.all("/api/auth/*splat", toNodeHandler(auth));
+
+// Parse JSON bodies
+app.use(express.json());
 
 // Health check
 app.get("/", (req: Request, res: Response) => {
@@ -71,6 +71,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error("Server error:", err);
   res.status(500).json({ error: err.message });
 });
+
+const PORT = process.env.PORT ?? 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
