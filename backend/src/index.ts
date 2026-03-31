@@ -62,9 +62,9 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 app.use(express.json());
 
 // Health check
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "Hello, world!" });
-});
+// app.get("/", (req: Request, res: Response) => {
+//   res.json({ message: "Hello, world!" });
+// });
 
 // Error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
