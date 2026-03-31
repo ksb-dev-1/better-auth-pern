@@ -141,7 +141,6 @@ export const auth = betterAuth({
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      // redirectURI: `${process.env.BACKEND_URL}/api/auth/callback/github`,
     },
   },
   trustedOrigins: [process.env.FRONTEND_URL!],
@@ -155,7 +154,7 @@ export const auth = betterAuth({
     defaultCookieAttributes: {
       secure: true,
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "none",
     },
   },
 });
