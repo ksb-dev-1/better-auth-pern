@@ -1,0 +1,33 @@
+import { LoaderCircle } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+interface ActionButtonProps extends React.ComponentProps<typeof Button> {
+  loading: boolean;
+}
+
+export function ActionButton({
+  loading,
+  disabled,
+  children,
+  className,
+  ...props
+}: ActionButtonProps) {
+  return (
+    <Button
+      disabled={loading || disabled}
+      className={cn("font-semibold", className)}
+      {...props}
+    >
+      {loading ? (
+        <span className="flex items-center gap-2">
+          {children}
+          <LoaderCircle size={16} className="animate-spin" />
+        </span>
+      ) : (
+        children
+      )}
+    </Button>
+  );
+}
