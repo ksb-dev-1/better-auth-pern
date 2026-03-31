@@ -14,6 +14,8 @@
 //     allowedHeaders: ["Content-Type", "Authorization"],
 //   }),
 // );
+// // Cookie parser - REQUIRED for OAuth
+// app.use(cookieParser());
 // app.all("/api/auth/*splat", toNodeHandler(auth));
 // app.use(express.json());
 // app.get("/", (req: Request, res: Response) => {
@@ -34,7 +36,6 @@
 // ==================================================================
 // server.ts or index.ts
 import { toNodeHandler } from "better-auth/node";
-import cookieParser from "cookie-parser";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 
@@ -42,7 +43,6 @@ import "./env.js";
 import { auth } from "./lib/auth.js";
 
 const app = express();
-app.set("trust proxy", 1);
 const PORT = process.env.PORT ?? 3000;
 
 // CORS configuration - CRITICAL for OAuth
@@ -54,9 +54,6 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization", "Cookie"],
   }),
 );
-
-// Cookie parser - REQUIRED for OAuth
-app.use(cookieParser());
 
 // Parse JSON bodies
 app.use(express.json());
@@ -78,5 +75,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
   console.log(`Frontend URL: ${process.env.FRONTEND_URL}`);
-  console.log(`Backend URL: ${process.env.BETTERAUTH_URL}`);
+  console.log(`Backend URL: ${process.env.BETTER_AUTH_URL}`);
 });

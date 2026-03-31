@@ -5,6 +5,10 @@
 // import { sendResetPasswordEmail } from "../emails/_lib/send-reset-password-email.js";
 // import { sendEmailVerify } from "../emails/_lib/send-verification-email.js";
 // export const ALLOWED_ORIGINS = [process.env.FRONT_END_URL!];
+// const backendUrl = process.env.BACKEND_URL || process.env.BETTER_AUTH_URL;
+// if (!backendUrl) {
+//   throw new Error("BACKEND_URL or BETTER_AUTH_URL env var is not set!");
+// }
 // export const auth = betterAuth({
 //   database: drizzleAdapter(db, {
 //     provider: "pg",
@@ -47,6 +51,9 @@
 //     google: {
 //       clientId: process.env.GOOGLE_CLIENT_ID!,
 //       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+// redirectURI: `${process.env.BACKEND_URL}/api/auth/callback/github`,
+// redirectURI:
+//   "https://better-auth-backend.onrender.com/api/auth/callback/github",
 //     },
 //     github: {
 //       clientId: process.env.GITHUB_CLIENT_ID!,
@@ -59,12 +66,22 @@
 //     crossSubdomainCookies: {
 //       enabled: true,
 //     },
+//     //Critical: Store state in database instead of cookies
+//     state: {
+//       storeInCookie: false,
+//       storeInDatabase: true,
+//     },
+//     //Or if you must use cookies, configure them properly
 //     defaultCookieAttributes: {
 //       secure: true,
 //       httpOnly: true,
 //       sameSite: "none", // 🔑 Required for cross-origin cookies
 //       partitioned: true, // CHIPS support
+//       maxAge: 60 * 10, // 10 minutes
 //     },
+//   },
+//   logger: {
+//     level: "debug",
 //   },
 // });
 // =========================================================
@@ -77,12 +94,6 @@ import { sendResetPasswordEmail } from "../emails/_lib/send-reset-password-email
 import { sendEmailVerify } from "../emails/_lib/send-verification-email.js";
 
 export const ALLOWED_ORIGINS = [process.env.FRONTEND_URL!];
-
-// const backendUrl = process.env.BACKEND_URL || process.env.BETTER_AUTH_URL;
-
-// if (!backendUrl) {
-//   throw new Error("BACKEND_URL or BETTER_AUTH_URL env var is not set!");
-// }
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -130,33 +141,16 @@ export const auth = betterAuth({
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      // redirectURI: `${process.env.BACKEND_URL}/api/auth/callback/github`,
-      redirectURI:
-        "https://better-auth-backend.onrender.com/api/auth/callback/github",
     },
   },
-  trustedOrigins: [process.env.FRONTEND_URL!, process.env.BACKEND_URL!],
+  trustedOrigins: [process.env.FRONTEND_URL!],
   baseURL: process.env.BETTER_AUTH_URL,
   advanced: {
-    // crossSubdomainCookies: {
-    //   enabled: true,
-    // },
-    // Critical: Store state in database instead of cookies
-    // state: {
-    //   storeInCookie: false,
-    //   storeInDatabase: true,
-    // },
-    // Or if you must use cookies, configure them properly
     defaultCookieAttributes: {
       secure: true,
       httpOnly: true,
       sameSite: "none",
-      // partitioned: true,
-      maxAge: 60 * 10, // 10 minutes
+      maxAge: 60 * 10,
     },
-  },
-  // Add this to see more debug info
-  logger: {
-    level: "debug",
   },
 });
