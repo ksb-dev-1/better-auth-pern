@@ -79,7 +79,8 @@ export default function SignIn() {
 
     const result = await authClient.signIn.social({
       provider,
-      callbackURL: ROUTES.DASHBOARD,
+      // callbackURL: ROUTES.DASHBOARD,
+      callbackURL: `${window.location.origin}${ROUTES.DASHBOARD}`,
     });
 
     if (result?.error) {
