@@ -151,7 +151,7 @@ export const auth = betterAuth({
       secure: true,
       httpOnly: true,
       sameSite: "lax",
-      // partitioned: true,
+      partitioned: true,
       maxAge: 60 * 10, // 10 minutes
     },
   },
