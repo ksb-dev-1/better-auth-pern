@@ -57,8 +57,7 @@ app.use(
 
 // Auth handler - MUST be before other routes
 // app.all("/api/auth/*splat", toNodeHandler(auth));
-// 3. Auth handler (Using the greedy wildcard for Express 5)
-app.all("/api/auth*", toNodeHandler(auth));
+app.all("/api/auth/:splat*", toNodeHandler(auth));
 
 // Parse JSON bodies
 app.use(express.json());
