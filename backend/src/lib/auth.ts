@@ -78,6 +78,12 @@ import { sendEmailVerify } from "../emails/_lib/send-verification-email.js";
 
 export const ALLOWED_ORIGINS = [process.env.FRONT_END_URL!];
 
+const backendUrl = process.env.BACK_END_URL || process.env.BETTER_AUTH_URL;
+
+if (!backendUrl) {
+  throw new Error("BACK_END_URL or BETTER_AUTH_URL env var is not set!");
+}
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -129,7 +135,7 @@ export const auth = betterAuth({
         "https://better-auth-backend.onrender.com/api/auth/callback/github",
     },
   },
-  trustedOrigins: [process.env.FRONT_END_URL!, process.env.BACKEND_URL!],
+  trustedOrigins: [process.env.FRONT_END_URL!, process.env.BACK_END_URL!],
   baseURL: process.env.BETTER_AUTH_URL,
   advanced: {
     // crossSubdomainCookies: {
