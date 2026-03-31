@@ -125,15 +125,15 @@ export const auth = betterAuth({
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      redirectURI: `${process.env.FRONT_END_URL}/api/auth/callback/github`,
+      redirectURI: `${process.env.BACK_END_URL}/api/auth/callback/github`,
     },
   },
-  trustedOrigins: [process.env.FRONT_END_URL!, process.env.BACK_END_URL!],
+  trustedOrigins: [process.env.FRONT_END_URL!, process.env.BACKEND_URL!],
   baseURL: process.env.BETTER_AUTH_URL,
   advanced: {
-    crossSubdomainCookies: {
-      enabled: true,
-    },
+    // crossSubdomainCookies: {
+    //   enabled: true,
+    // },
     defaultCookieAttributes: {
       secure: true,
       httpOnly: true,
