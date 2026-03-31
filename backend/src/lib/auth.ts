@@ -141,7 +141,7 @@ export const auth = betterAuth({
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      disableStateCheck: true, // Add this temporarily
+      redirectURI: `${process.env.BACKEND_URL}/api/auth/callback/github`,
     },
   },
   trustedOrigins: [process.env.FRONTEND_URL!],
