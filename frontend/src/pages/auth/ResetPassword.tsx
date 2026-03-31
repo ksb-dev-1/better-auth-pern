@@ -122,7 +122,7 @@ export function ResetPassword() {
               loading={loading}
               className="w-full mt-4 hover:opacity-80"
             >
-              Send password reset link
+              Reset
             </ActionButton>
           </form>
         </CardContent>
