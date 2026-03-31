@@ -138,20 +138,20 @@ export const auth = betterAuth({
   trustedOrigins: [process.env.FRONTEND_URL!, process.env.BACKEND_URL!],
   baseURL: process.env.BETTER_AUTH_URL,
   advanced: {
-    crossSubdomainCookies: {
-      enabled: true,
-    },
+    // crossSubdomainCookies: {
+    //   enabled: true,
+    // },
     // Critical: Store state in database instead of cookies
-    state: {
-      storeInCookie: false,
-      storeInDatabase: true,
-    },
+    // state: {
+    //   storeInCookie: false,
+    //   storeInDatabase: true,
+    // },
     // Or if you must use cookies, configure them properly
     defaultCookieAttributes: {
       secure: true,
       httpOnly: true,
-      sameSite: "lax",
-      partitioned: true,
+      sameSite: "none",
+      // partitioned: true,
       maxAge: 60 * 10, // 10 minutes
     },
   },
