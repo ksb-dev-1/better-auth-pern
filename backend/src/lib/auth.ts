@@ -76,12 +76,12 @@ import * as schema from "../db/schema.js";
 import { sendResetPasswordEmail } from "../emails/_lib/send-reset-password-email.js";
 import { sendEmailVerify } from "../emails/_lib/send-verification-email.js";
 
-export const ALLOWED_ORIGINS = [process.env.FRONT_END_URL!];
+export const ALLOWED_ORIGINS = [process.env.FRONTEND_URL!];
 
-const backendUrl = process.env.BACK_END_URL || process.env.BETTER_AUTH_URL;
+const backendUrl = process.env.BACKEND_URL || process.env.BETTER_AUTH_URL;
 
 if (!backendUrl) {
-  throw new Error("BACK_END_URL or BETTER_AUTH_URL env var is not set!");
+  throw new Error("BACKEND_URL or BETTER_AUTH_URL env var is not set!");
 }
 
 export const auth = betterAuth({
@@ -95,7 +95,7 @@ export const auth = betterAuth({
       const urlWithCallback = new URL(url);
       urlWithCallback.searchParams.set(
         "callbackURL",
-        `${process.env.FRONT_END_URL}/reset-password`,
+        `${process.env.FRONTEND_URL}/reset-password`,
       );
       void sendResetPasswordEmail({
         from: process.env.EMAIL_FROM!,
@@ -112,7 +112,7 @@ export const auth = betterAuth({
       const urlWithCallback = new URL(url);
       urlWithCallback.searchParams.set(
         "callbackURL",
-        `${process.env.FRONT_END_URL}/dashboard`,
+        `${process.env.FRONTEND_URL}/dashboard`,
       );
       void sendEmailVerify({
         from: process.env.EMAIL_FROM!,
@@ -126,7 +126,6 @@ export const auth = betterAuth({
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      // redirectURI: `${process.env.FRONT_END_URL}/api/auth/callback/google`,
     },
     github: {
       clientId: process.env.GITHUB_CLIENT_ID!,
@@ -135,7 +134,7 @@ export const auth = betterAuth({
         "https://better-auth-backend.onrender.com/api/auth/callback/github",
     },
   },
-  trustedOrigins: [process.env.FRONT_END_URL!, process.env.BACK_END_URL!],
+  trustedOrigins: [process.env.FRONTEND_URL!, process.env.BACKEND_URL!],
   baseURL: process.env.BETTER_AUTH_URL,
   advanced: {
     // crossSubdomainCookies: {

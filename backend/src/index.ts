@@ -48,7 +48,7 @@ const PORT = process.env.PORT ?? 3000;
 // CORS configuration - CRITICAL for OAuth
 app.use(
   cors({
-    origin: process.env.FRONT_END_URL,
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -77,6 +77,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
-  console.log(`Frontend URL: ${process.env.FRONT_END_URL}`);
-  console.log(`Backend URL: ${process.env.BETTER_AUTH_URL}`);
+  console.log(`Frontend URL: ${process.env.FRONTEND_URL}`);
+  console.log(`Backend URL: ${process.env.BETTERAUTH_URL}`);
 });
