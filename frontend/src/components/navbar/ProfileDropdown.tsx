@@ -52,8 +52,6 @@ export default function ProfileDropdownMenu({ image }: ProfileDropdownProps) {
     }
   };
 
-  console.log(image);
-
   return (
     <DropdownMenu open={open} onOpenChange={setOpen}>
       <DropdownMenuTrigger

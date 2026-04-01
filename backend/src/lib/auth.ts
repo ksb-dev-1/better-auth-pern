@@ -155,6 +155,7 @@ export const auth = betterAuth({
       secure: true,
       httpOnly: true,
       sameSite: "none",
+      domain: process.env.BACKEND_URL,
     },
   },
 });

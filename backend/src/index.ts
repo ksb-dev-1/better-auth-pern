@@ -61,21 +61,23 @@ app.all("/api/auth/*splat", toNodeHandler(auth));
 // Parse JSON bodies
 app.use(express.json());
 
-// Health check
-// app.get("/", (req: Request, res: Response) => {
-//   res.json({ message: "Hello, world!" });
-// });
-
 // Error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error("Server error:", err);
   res.status(500).json({ error: err.message });
 });
 
-const PORT = process.env.PORT ?? 3000;
+const PORT = Number(process.env.PORT) || 3000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+console.log("PORT from env:", process.env.PORT);
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
   console.log(`Frontend URL: ${process.env.FRONTEND_URL}`);
   console.log(`Backend URL: ${process.env.BETTER_AUTH_URL}`);
 });
+
+// Health check
+// app.get("/", (req: Request, res: Response) => {
+//   res.json({ message: "Hello, world!" });
+// });
