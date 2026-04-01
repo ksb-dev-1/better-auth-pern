@@ -1,40 +1,3 @@
-// import { toNodeHandler } from "better-auth/node";
-// import cors from "cors";
-// import express, { Request, Response } from "express";
-// import "./env.js";
-// import { auth } from "./lib/auth.js";
-// const app = express();
-// app.set("trust proxy", 1);
-// const PORT = process.env.PORT ?? 3000;
-// app.use(
-//   cors({
-//     origin: process.env.FRONT_END_URL,
-//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Specify allowed HTTP methods
-//     credentials: true,
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   }),
-// );
-// // Cookie parser - REQUIRED for OAuth
-// app.use(cookieParser());
-// app.all("/api/auth/*splat", toNodeHandler(auth));
-// app.use(express.json());
-// app.get("/", (req: Request, res: Response) => {
-//   res.json({ message: "Hello, world!" });
-// });
-// app.listen(PORT, () => {
-//   console.log(`Server running on http://localhost:${PORT}`);
-// });
-// app.get("/api/me", async (req, res) => {
-//   const session = await auth.api.getSession({
-//     headers: fromNodeHeaders(req.headers),
-//   });
-//   if (!session) {
-//     return res.status(401).json({ error: "Unauthorized" });
-//   }
-//   return res.json(session);
-// });
-// ==================================================================
-// server.ts or index.ts
 import { toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
@@ -76,8 +39,3 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`Frontend URL: ${process.env.FRONTEND_URL}`);
   console.log(`Backend URL: ${process.env.BETTER_AUTH_URL}`);
 });
-
-// Health check
-// app.get("/", (req: Request, res: Response) => {
-//   res.json({ message: "Hello, world!" });
-// });

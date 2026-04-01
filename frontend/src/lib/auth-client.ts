@@ -6,8 +6,3 @@ export const authClient = createAuthClient({
     credentials: "include",
   },
 });
-
-// credentials: "include",
-// headers: {
-//   "Content-Type": "application/json",
-// },
