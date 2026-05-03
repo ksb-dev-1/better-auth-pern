@@ -64,13 +64,16 @@ export const auth = betterAuth({
     crossSubDomainCookies: {
       enabled: true,
     },
+    // defaultCookieAttributes: {
+    //   secure: true,
+    //   httpOnly: true,
+    //   sameSite: "none",
+    //   domain: process.env.COOKIE_DOMAIN,
+    // },
     defaultCookieAttributes: {
-      secure: true,
+      secure: false,
       httpOnly: true,
-      sameSite: "none",
-      domain: process.env.COOKIE_DOMAIN,
+      sameSite: "lax",
     },
   },
 });
-
-// COOKIE_DOMAIN=.ksb-dev.in

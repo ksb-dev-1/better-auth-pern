@@ -39,3 +39,10 @@ app.listen(PORT, "0.0.0.0", () => {
   console.log(`Frontend URL: ${process.env.FRONTEND_URL}`);
   console.log(`Backend URL: ${process.env.BETTER_AUTH_URL}`);
 });
+
+// app.get("/api/me", async (req, res) => {
+//  	const session = await auth.api.getSession({
+//       headers: fromNodeHeaders(req.headers),
+//     });
+// 	return res.json(session);
+// });
